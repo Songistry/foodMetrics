@@ -18,7 +18,9 @@ module.exports = function (grunt) {
 			     },
 			     js: {
                                  src: ['bower_components/jquery/dist/jquery.js',
-                                       'bower_components/bootstrap/dist/js/bootstrap.js'],
+                                       'bower_components/bootstrap/dist/js/bootstrap.js',
+				       'bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
+				       'bower_components/highcharts/highcharts.src.js'],
                                  dest: 'build/components/components.js'
                              }
                          },
