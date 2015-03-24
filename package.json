@@ -1,5 +1,5 @@
 {
-  "name": "nutrition",
+  "name": "foodMetrics",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -16,8 +16,6 @@
     "grunt-contrib-cssmin": "^0.12.2",
     "grunt-contrib-less": "^1.0.0",
     "grunt-contrib-uglify": "^0.8.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-shell-spawn": "^0.3.1",
-    "serve-static": "^1.9.2"
+    "grunt-contrib-watch": "^0.6.1"
   }
 }
