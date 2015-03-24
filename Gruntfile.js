@@ -3,6 +3,22 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        connect: {
+            server: {
+                options: {
+                    port: 9001,
+                    hostname: 'localhost',
+                    keepalive: true,
+                    base: {
+                        path: './',
+                        options: {
+                            index: 'src/index.html',
+                            maxAge: 300000
+                        }
+                    }
+                }
+            }
+        },
         concat: {
             options: {
                 sourceMap: true
@@ -20,7 +36,10 @@ module.exports = function(grunt) {
             component_js: {
                 src: ['bower_components/jquery/dist/jquery.js',
                     'bower_components/bootstrap/dist/js/bootstrap.js',
+                    'bower_components/angular/angular.js',
+                    'bower_components/angular-ui-router/release/angular-ui-router.js',
                     'bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
+                    'bower_components/angular-animate/angular-animate.js',
                     'bower_components/highcharts/highcharts.src.js'
                 ],
                 dest: 'build/components/components.js'
@@ -28,6 +47,13 @@ module.exports = function(grunt) {
             js: {
                 src: ['src/**/*.js'],
                 dest: 'build/app.js'
+            }
+        },
+        ngAnnotate: {
+            js: {
+                files: {
+                    'build/app.js': ['build/app.js']
+                }
             }
         },
         cssmin: {
@@ -49,7 +75,7 @@ module.exports = function(grunt) {
                 src: ['build/components/components.js'],
                 dest: 'dist/components.min.js'
             },
-            js_build: {
+            js: {
                 src: ['build/app.js'],
                 dest: 'dist/app.min.js'
             }
@@ -82,8 +108,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    // Default task(s).
-    grunt.registerTask('default', ['less', 'concat', 'cssmin', 'uglify', 'watch']);
-    grunt.registerTask('build', ['less', 'concat', 'cssmin', 'uglify']);
+    grunt.loadNpmTasks('grunt-ng-annotate');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
+    // Default task(s).
+    grunt.registerTask('default', ['less', 'concat', 'cssmin', 'ngAnnotate', 'uglify', 'watch']);
+    grunt.registerTask('build', ['concat:js', 'ngAnnotate', 'uglify:js']);
 };
+
