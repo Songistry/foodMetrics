@@ -8,7 +8,7 @@ module.exports = function(grunt) {
                 options: {
                     port: 9001,
                     hostname: 'localhost',
-                    keepalive: true,
+                    // keepalive: true,
                     base: {
                         path: './',
                         options: {
@@ -95,10 +95,19 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: 'src/**/*.less',
-            tasks: ['less'],
-            options: {
-                interrupt: true
+            less: {
+                files: 'src/**/*.less',
+                tasks: ['less'],
+                options: {
+                    interrupt: true
+                }
+            },
+            js: {
+                files: 'src/**/*.js',
+                tasks: 'build',
+                options: {
+                    interrupt: true
+                }
             }
         }
     });
@@ -112,7 +121,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
 
     // Default task(s).
-    grunt.registerTask('default', ['less', 'concat', 'cssmin', 'ngAnnotate', 'uglify', 'watch']);
+    grunt.registerTask('default', ['less', 'concat', 'cssmin', 'ngAnnotate', 'uglify', 'connect', 'watch']);
     grunt.registerTask('build', ['concat:js', 'ngAnnotate', 'uglify:js']);
 };
-
