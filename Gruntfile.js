@@ -8,7 +8,7 @@ module.exports = function(grunt) {
                 options: {
                     port: 9001,
                     hostname: 'localhost',
-                    // keepalive: true,
+                    livereload: 9002,
                     base: {
                         path: './',
                         options: {
@@ -97,8 +97,9 @@ module.exports = function(grunt) {
         watch: {
             less: {
                 files: 'src/**/*.less',
-                tasks: ['less'],
+                tasks: 'less',                
                 options: {
+                    livereload: 9002,
                     interrupt: true
                 }
             },
@@ -106,6 +107,14 @@ module.exports = function(grunt) {
                 files: 'src/**/*.js',
                 tasks: 'build',
                 options: {
+                    livereload: 9002,
+                    interrupt: true
+                }
+            },
+            html: {
+                files: 'src/**/*.html',
+                options: {
+                    livereload: 9002,
                     interrupt: true
                 }
             }

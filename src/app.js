@@ -4,17 +4,24 @@
     /* @ngInject */
     function config($stateProvider, $urlRouterProvider) {
     	$urlRouterProvider.otherwise('/');
+        $urlRouterProvider.when('/', '/home');
 
         $stateProvider
             .state('root', {
                 url: '/',
+                abstract: true,
                 templateUrl: 'src/core/navigation/pageTemplate.html'
+            })
+            .state('root.home', {
+                url: 'home',
+                templateUrl: 'src/home/home.html',
+                controller: 'homeController',
+                controllerAs: 'homeCtrl'
             });
     }
 
 	/* @ngInject */
     function run() {
-    	console.log('running');
     }
 
     angular
